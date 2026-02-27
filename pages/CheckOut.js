@@ -13,6 +13,10 @@ class CheckOut{
         this.quantity = page.locator('input[id="quantity-input"]');
         this.cartindicator = page.locator('[data-test="nav-cart"]');
         this.buyproduct = page.locator('span[data-icon="cart-shopping"]');
+        this.logeduser = page.locator('a[data-test="nav-menu"]');
+        this.userfavorites = page.locator('a[data-test="nav-my-favorites"]');
+        this.favoriteCards = page.locator('app-favorites .card.mb-3');
+        this.deletefavorites = page.locator('[data-test="delete"]');
        // Billing
         this.proceedbutton = page.locator('button[data-test="proceed-1"]');
         this.proceed = page.locator('button[data-test="proceed-2"]');
@@ -69,6 +73,17 @@ class CheckOut{
         await this.proceed.click();
     }
 
+    async logedUser(){
+        await this.logeduser.click();
+    }
+    
+    async userFavorites(){
+       await this.userfavorites.click();
+    }
+
+    async deleteFavorites(){
+        await this.deletefavorites.click();
+    }
     async billingAddress(billingData) {
         await this.street.fill(billingData.street);
         await this.state.fill(billingData.state);

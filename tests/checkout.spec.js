@@ -26,6 +26,35 @@ test.beforeEach(async ({ page }) => {
     await expect(loginPage.pagetitle).toBeVisible();
 
 });
+
+ test('verify that cart badge is empty or zero when no products are selected', async ({ page }) => {
+
+    await checkoutPage.clickHome();
+
+    await expect(checkoutPage.cartindicator).toBeHidden();
+
+  });
+
+  test('add a product to the favorites list and verify it is saved', async ({ page }) => {
+
+    await checkoutPage.clickHome();
+
+    await checkoutPage.selectItem();
+
+    await checkoutPage.addToFavorites();
+
+    await checkoutPage.logedUser();
+
+    await checkoutPage.userFavorites();
+
+    await expect(checkoutPage.page).toHaveURL('https://practicesoftwaretesting.com/account/favorites');
+
+    await expect(checkoutPage.page).toHaveTitle('Favorites - Practice Software Testing - Toolshop - v5.0');
+
+    await expect(checkoutPage.favoriteCards).not.toHaveCount(0);
+
+
+  })
      test('add a single product to the cart and verify its presence', async ({ page }) => {
 
     await checkoutPage.clickHome();
