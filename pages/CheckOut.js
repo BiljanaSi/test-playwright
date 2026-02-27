@@ -34,7 +34,7 @@ class CheckOut{
 
 
     }
-     async Home(){
+     async clickHome(){
         await this.home.click();
     }
 
@@ -57,31 +57,31 @@ class CheckOut{
         await this.removeoneitem.click();
     }
 
-     async CartIndicator(){
+     async cartIndicator(){
         await this.cartindicator.click();
     }
 
-     async ProceedButton(){
+     async proceedButton(){
         await this.proceedbutton.click();
     }
 
-     async ProceedToCheckOut(){
+     async proceedToCheckOut(){
         await this.proceed.click();
     }
 
-    async BillingAddress(billingData) {
+    async billingAddress(billingData) {
         await this.street.fill(billingData.street);
         await this.state.fill(billingData.state);
         await this.postalcode.fill(billingData.postalCode);
         await this.proceedtocheckout.click();
     }
 
-     async PaymentMethod(){
+     async paymentMethod(){
         await this.paymentmethod.click();
         await this.paymentmethod.selectOption({ value : "credit-card" });  
     }
 
-    async Payment(paymentData ){
+    async payment(paymentData ){
         await this.creditcardnumber.fill(paymentData.creditCardNumber);
         await this.expirationdate.fill(paymentData.expirationDate);
         await this.cvv.fill(paymentData.cvv);

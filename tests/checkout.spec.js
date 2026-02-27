@@ -3,60 +3,77 @@ import { user, billingData, paymentData } from '../test-data/userData';
 const { LogIn } = require('../pages/LogIn').default;
 const { CheckOut } = require('../pages/CheckOut').default;
 
-test('Log in, select one item and check prise', async ({ page }) => {
+test.describe('Shopping Cart & Checkout Flow', () => {
+  let loginPage;
+  let checkoutPage;
 
-    const login  = new LogIn(page);
+test.beforeEach(async ({ page }) => {
 
-    const checkout = new  CheckOut(page);
+     loginPage  = new LogIn(page);
 
-    await login.goto();
+     checkoutPage = new  CheckOut(page);
+
+    await loginPage.goto();
 
     await expect(page).toHaveURL('https://practicesoftwaretesting.com/');
 
-    await login.clickOnsignLink();
+    await loginPage.clickOnsignLink();
 
-    await login.Login(user.email, user.password);
+    await loginPage.Login(user.email, user.password);
 
     await expect(page).toHaveURL('https://practicesoftwaretesting.com/account');
 
-    await expect(login.pagetitle).toBeVisible();
+    await expect(loginPage.pagetitle).toBeVisible();
 
-    await checkout.Home();
+});
+     test('add a single product to the cart and verify its presence', async ({ page }) => {
 
-    await checkout.selectItem();
+    await checkoutPage.clickHome();
 
-    await expect(checkout.price).toBeVisible();
+    await checkoutPage.selectItem();
 
-    await expect(checkout.price).toHaveText('14.15');
+    await expect(checkoutPage.price).toBeVisible();
 
-    await checkout.addToCard();
+    await expect(checkoutPage.price).toHaveText('14.15');
 
-    await expect(checkout.cartindicator).toHaveText('1');
+    await checkoutPage.addToCard();
+
+    await expect(checkoutPage.cartindicator).toHaveText('1');
 
 
-    await checkout.addMoreItem();
+    await checkoutPage.addMoreItem();
 
     //await expect(checkout.cartindicator).toHaveText('2');
 
-    await checkout.removeOneItem();
+    await checkoutPage.removeOneItem();
 
-    await expect(checkout.cartindicator).toHaveText('1');
+    await expect(checkoutPage.cartindicator).toHaveText('1');
 
-    await checkout.CartIndicator();
+});
+test('Should complete the full checkout journey with valid billing info', async ({ page }) => {
 
-    await checkout.ProceedButton();
+    await checkoutPage.clickHome();
 
-    await checkout.ProceedToCheckOut();
+    await checkoutPage.selectItem();
 
-    await checkout.BillingAddress(billingData);
+    await checkoutPage.addToCard();
 
-    await checkout.PaymentMethod();
+    await checkoutPage.cartIndicator();
 
-    await checkout.Payment(paymentData);
+    await checkoutPage.proceedButton();
 
-    await expect(checkout.paymentsuccessmessage).toHaveText('Payment was successful');
+    await checkoutPage.proceedToCheckOut();
+
+    await checkoutPage.billingAddress(billingData);
+
+    await checkoutPage.paymentMethod();
+
+    await checkoutPage.payment(paymentData);
+
+    await expect(checkoutPage.paymentsuccessmessage).toHaveText('Payment was successful');
 
     });
+       });
    
  
 
