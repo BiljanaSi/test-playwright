@@ -55,7 +55,7 @@ test.beforeEach(async ({ page }) => {
     expect(await productsPage.isPriceSortedDesc()).toBe(true);
   });
 
-  test.only('products are filtered correctly when searching', async () => {
+  test('products are filtered correctly when searching', async () => {
 
   await productsPage.searchProduct('Hammer');
 
