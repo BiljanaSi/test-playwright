@@ -7,6 +7,8 @@ class ProductsPage {
         this.selectitem = page.locator('img[alt="Combination Pliers"]');
         this.price = page.locator('span[data-test="unit-price"]');
         this.addtocard = page.locator('[data-test="add-to-cart"]');
+        this.searchInput = page.locator('input[data-test="search-query"]');
+        this.searchButton = page.locator('button[data-test="search-submit"]');
         
     }
 
@@ -78,8 +80,21 @@ class ProductsPage {
         }
         return true;
     }
+
+    async searchProduct(productName) {
+
+    await this.searchInput.fill(productName);
+
+    await this.searchButton.click();
+  }
+   async searchProduct(productName) {
+    await this.searchInput.fill(productName);
+    await this.searchButton.click();
   }
 
-
+  async getSearchResults() {
+    return await this.productNames.allTextContents();
+  }
+  }
 
 export default {ProductsPage};
