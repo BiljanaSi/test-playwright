@@ -5,7 +5,7 @@ const { CheckOut } = require('../pages/CheckOut').default;
 const { ProductsPage } = require('../pages/ProductsPage').default;
 
 test.describe('Shopping Cart & Checkout Flow', () => {
-  
+
   let loginPage;
   let checkoutPage;
   let productsPage;
@@ -54,4 +54,15 @@ test.beforeEach(async ({ page }) => {
 
     expect(await productsPage.isPriceSortedDesc()).toBe(true);
   });
+
+  test.only('products are filtered correctly when searching', async () => {
+
+  await productsPage.searchProduct('Hammer');
+
+  const results = await productsPage.getSearchResults();
+
+  for (const title of results) {
+    expect(title.toLowerCase()).toContain('hammer');
+  }
+});
   });
