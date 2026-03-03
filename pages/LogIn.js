@@ -35,10 +35,7 @@ class LogIn {
     async clickOnSingOut(){
         await this.singout.click();
     }
-    
 
-   
-   
     
 }
 
