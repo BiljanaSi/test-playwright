@@ -3,15 +3,6 @@
 End-to-end (E2E) tests for a web application using **Playwright**.  
 Tests are structured with the **Page Object Model** and include both **happy path and negative scenarios**.
 
-## Structure
-
-/tests # E2E test files
-/pages # Page Object models
-/test-data # Test data
-/reports # HTML reports
-/playwright.config.js
-
-
 ## Installation
 ```bash
 git clone https://github.com/BiljanaSi/test-playwright.git
@@ -19,6 +10,13 @@ cd test-playwright
 npm install
 npx playwright install
 
+## Structure
+ 
+/tests # E2E test files
+/pages # Page Object models
+/test-data # Test data
+/reports # HTML reports
+/playwright.config.js
 
 Running Tests
 
