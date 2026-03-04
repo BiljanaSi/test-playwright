@@ -1,4 +1,5 @@
-import { test, expect } from '@playwright/test'
+const { test } = require('../fixtures/test-hooks');
+const { expect } = require('@playwright/test');
 import { validContact, invalidContact } from '../test-data/contactData';
 const { Contact } = require('../pages/Contact').default;
 

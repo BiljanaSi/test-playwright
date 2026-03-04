@@ -1,4 +1,5 @@
-import { test, expect } from '@playwright/test'
+const { test } = require('../fixtures/test-hooks');
+const { expect } = require('@playwright/test');
 const { LogIn } = require('../pages/LogIn').default;
 
 test('Successful login', async ({ page }) => {

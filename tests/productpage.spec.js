@@ -1,4 +1,5 @@
-import { test, expect } from '@playwright/test'
+const { test } = require('../fixtures/test-hooks');
+const { expect } = require('@playwright/test');
 import { user, billingData, paymentData } from '../test-data/userData';
 const { LogIn } = require('../pages/LogIn').default;
 const { CheckOut } = require('../pages/CheckOut').default;
