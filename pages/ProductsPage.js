@@ -19,6 +19,7 @@ class ProductsPage {
      async clickOnSortAsc(){
         await this.sort.click();
         await this.sort.selectOption({ value : "name,asc" });  
+        await this.page.waitForTimeout(500);
     }
 
       async verifyFirstProductStartsWithA() {

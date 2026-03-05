@@ -19,12 +19,15 @@ class LogIn {
     async clickOnsignLink(){
         await this.singin.click();
     }
+    
 
-    async Login(email, password) {
-        await this.email.fill(email);
-        await this.password.fill(password);
+     async loginUser(user) {
+
+        await this.email.fill(user.email);
+        await this.password.fill(user.password);
         await this.login.click();
     }
+
     async clickOnLogin(){
         await this.login.click();
     }
