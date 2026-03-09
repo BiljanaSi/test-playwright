@@ -41,6 +41,8 @@ class ProductsPage {
         await this.sort.click();
         await this.sort.selectOption({ value : "name,desc" });  
 
+         await this.page.waitForTimeout(500);
+
         const texts = await this.getItemsText();
         for (let i = 0; i < texts.length - 1; i++) {
             if (texts[i].localeCompare(texts[i + 1]) < 0) {
@@ -53,11 +55,13 @@ class ProductsPage {
      async clickOnSortPriceLow() {
         await this.sort.click();
         await this.sort.selectOption({value : "price,desc"});
+        await this.page.waitForTimeout(500);
     }
 
     async clickOnSortPriceHigh() {
         await this.sort.click();
         await this.sort.selectOption({value : "price,asc"});
+        await this.page.waitForTimeout(500);
     }
 
 
@@ -91,6 +95,7 @@ class ProductsPage {
    async searchProduct(productName) {
     await this.searchInput.fill(productName);
     await this.searchButton.click();
+    await this.page.waitForTimeout(500);
   }
 
   async getSearchResults() {

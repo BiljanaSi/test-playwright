@@ -1,5 +1,5 @@
 export const users = {
-  user1: { email: "	customer@practicesoftwaretesting.com", password: "welcome01" },
+  user1: { email: "customer@practicesoftwaretesting.com", password: "welcome01" },
   user2: { email: "customer2@practicesoftwaretesting.com", password: "welcome01" },
   user3: { email: "customer3@practicesoftwaretesting.com", password: "pass123" },
   user4: { email: "customer3@practicesoftwaretesting.com", password: "pass12222223"}  // invalid user login 

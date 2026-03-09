@@ -1,6 +1,6 @@
 const { test } = require('../fixtures/test-hooks');
 const { expect } = require('@playwright/test');
-import { user, billingData, paymentData } from '../test-data/userData';
+import { users, billingData, paymentData } from '../test-data/userData';
 const { LogIn } = require('../pages/LogIn').default;
 const { CheckOut } = require('../pages/CheckOut').default;
 const { ProductsPage } = require('../pages/ProductsPage').default;

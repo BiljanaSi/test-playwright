@@ -1,5 +1,6 @@
 const { test } = require('../fixtures/test-hooks');
 const { expect } = require('@playwright/test');
+import { users, billingData, paymentData } from '../test-data/userData';
 const { LogIn } = require('../pages/LogIn').default;
 
 test('Successful login', async ({ page }) => {
@@ -12,7 +13,7 @@ test('Successful login', async ({ page }) => {
 
     await login.clickOnsignLink();
 
-    await login.Login('customer@practicesoftwaretesting.com', 'welcome01');
+    await login.loginUser(users.user2);
 
     await expect(page).toHaveURL('https://practicesoftwaretesting.com/account');
 
@@ -33,7 +34,7 @@ test('Unsuccessful login', async ({ page }) => {
 
     await login.clickOnsignLink();
 
-    await login.Login('customer@testing.com', 'welcome0101');
+    await login.loginUser(users.user4);
 
     await login.clickOnLogin();
 
@@ -50,7 +51,7 @@ test('Unsuccessful login invalid', async ({ page }) => {
 
     await login.clickOnsignLink();
 
-    await login.Login('customer@testing.com', 'welcome0101');
+    await login.loginUser(users.user4);
 
     await login.clickOnLogin();
 

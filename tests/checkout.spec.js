@@ -1,6 +1,6 @@
 const { test } = require('../fixtures/test-hooks');
 const { expect } = require('@playwright/test');
-import { user, billingData, paymentData } from '../test-data/userData';
+import { users, billingData, paymentData } from '../test-data/userData';
 const { LogIn } = require('../pages/LogIn').default;
 const { CheckOut } = require('../pages/CheckOut').default;
 
@@ -20,15 +20,15 @@ test.beforeEach(async ({ page }) => {
 
     await loginPage.clickOnsignLink();
 
-    await loginPage.Login(user.email, user.password);
+});
+
+ test('verify that cart badge is empty or zero when no products are selected', async ({ page }) => {
+
+    await loginPage.loginUser(users.user2);
 
     await expect(page).toHaveURL('https://practicesoftwaretesting.com/account');
 
     await expect(loginPage.pagetitle).toBeVisible();
-
-});
-
- test('verify that cart badge is empty or zero when no products are selected', async ({ page }) => {
 
     await checkoutPage.clickHome();
 
@@ -37,6 +37,12 @@ test.beforeEach(async ({ page }) => {
   });
 
   test('add a product to the favorites list and verify it is saved', async ({ page }) => {
+
+    await loginPage.loginUser(users.user2);
+
+    await expect(page).toHaveURL('https://practicesoftwaretesting.com/account');
+
+    await expect(loginPage.pagetitle).toBeVisible();
 
     await checkoutPage.clickHome();
 
@@ -57,6 +63,12 @@ test.beforeEach(async ({ page }) => {
 
   })
      test('add a single product to the cart and verify its presence', async ({ page }) => {
+
+    await loginPage.loginUser(users.user2);
+
+    await expect(page).toHaveURL('https://practicesoftwaretesting.com/account');
+
+    await expect(loginPage.pagetitle).toBeVisible();
 
     await checkoutPage.clickHome();
 
@@ -81,6 +93,12 @@ test.beforeEach(async ({ page }) => {
 
 });
 test('Should complete the full checkout journey with valid billing info', async ({ page }) => {
+
+     await loginPage.loginUser(users.user2);
+
+    await expect(page).toHaveURL('https://practicesoftwaretesting.com/account');
+
+    await expect(loginPage.pagetitle).toBeVisible();
 
     await checkoutPage.clickHome();
 

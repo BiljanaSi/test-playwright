@@ -40,6 +40,7 @@ class CheckOut{
     }
      async clickHome(){
         await this.home.click();
+        await this.page.waitForTimeout(500)
     }
 
       async selectItem(){

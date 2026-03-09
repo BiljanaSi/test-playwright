@@ -14,6 +14,7 @@ class LogIn {
 
     async goto() {
         await this.page.goto('https://practicesoftwaretesting.com/');
+        await this.page.waitForTimeout(500)
     }
     
     async clickOnsignLink(){
@@ -24,19 +25,24 @@ class LogIn {
      async loginUser(user) {
 
         await this.email.fill(user.email);
+        await this.page.waitForTimeout(500);
         await this.password.fill(user.password);
+        await this.page.waitForTimeout(500)
         await this.login.click();
     }
 
     async clickOnLogin(){
         await this.login.click();
+        await this.page.waitForTimeout(500);
     }
     async clickOnLogetUser(){
         await this.navmeni.click();
+         await this.page.waitForTimeout(500);
     }
 
     async clickOnSingOut(){
         await this.singout.click();
+         await this.page.waitForTimeout(500);
     }
 
     
