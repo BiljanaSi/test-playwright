@@ -40,7 +40,7 @@ class CheckOut{
     }
      async clickHome(){
         await this.home.click();
-        await this.page.waitForTimeout(500)
+
     }
 
       async selectItem(){
@@ -86,6 +86,7 @@ class CheckOut{
         await this.deletefavorites.click();
     }
     async billingAddress(billingData) {
+        await this.page.waitForLoadState('networkidle');
         await this.street.fill(billingData.street);
         await this.state.fill(billingData.state);
         await this.postalcode.fill(billingData.postalCode);
@@ -98,6 +99,7 @@ class CheckOut{
     }
 
     async payment(paymentData ){
+        await this.page.waitForLoadState('networkidle');
         await this.creditcardnumber.fill(paymentData.creditCardNumber);
         await this.expirationdate.fill(paymentData.expirationDate);
         await this.cvv.fill(paymentData.cvv);

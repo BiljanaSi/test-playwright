@@ -4,6 +4,8 @@ import { registrationUser } from '../test-data/registrationData';
 
 const { RegistrationPage } = require('../pages/RegistrationPage').default;
 
+test.use({ storageState: { cookies: [], origins: [] } });
+
 test('Registration', async ({ page }) => {
 
     const registrationPage = new RegistrationPage(page);

@@ -19,12 +19,14 @@ class ProductsPage {
      async clickOnSortAsc(){
         await this.sort.click();
         await this.sort.selectOption({ value : "name,asc" });  
-        await this.page.waitForTimeout(500);
+        await this.page.waitForLoadState('networkidle');
     }
 
       async verifyFirstProductStartsWithA() {
 
         const firstProductName = (await this.productNames.first().textContent()).trim();
+
+          await this.page.waitForLoadState('networkidle');
 
         if (!firstProductName.startsWith('A')) {
             throw new Error(`First product does not start with A: ${firstProductName}`);
@@ -41,7 +43,7 @@ class ProductsPage {
         await this.sort.click();
         await this.sort.selectOption({ value : "name,desc" });  
 
-         await this.page.waitForTimeout(500);
+        await this.page.waitForLoadState('networkidle');
 
         const texts = await this.getItemsText();
         for (let i = 0; i < texts.length - 1; i++) {
@@ -55,13 +57,13 @@ class ProductsPage {
      async clickOnSortPriceLow() {
         await this.sort.click();
         await this.sort.selectOption({value : "price,desc"});
-        await this.page.waitForTimeout(500);
+        await this.page.waitForLoadState('networkidle');
     }
 
     async clickOnSortPriceHigh() {
         await this.sort.click();
         await this.sort.selectOption({value : "price,asc"});
-        await this.page.waitForTimeout(500);
+        await this.page.waitForLoadState('networkidle');
     }
 
 
@@ -91,12 +93,10 @@ class ProductsPage {
     await this.searchInput.fill(productName);
 
     await this.searchButton.click();
+
+    await this.page.waitForLoadState('networkidle');
   }
-   async searchProduct(productName) {
-    await this.searchInput.fill(productName);
-    await this.searchButton.click();
-    await this.page.waitForTimeout(500);
-  }
+  
 
   async getSearchResults() {
     return await this.productNames.allTextContents();

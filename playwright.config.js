@@ -30,6 +30,7 @@ export default defineConfig({
   ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
+  storageState: 'auth/user-state.json',
   screenshot: 'only-on-failure', // screenshot samo za failed testove
   video: 'retain-on-failure',    // video samo za failed testove
   trace: 'on-first-retry',       // trace za debug prilikom retry-a
