@@ -65,6 +65,7 @@ use: {
       name: 'chromium',
       use: { 
         ...devices['Desktop Chrome'],
+        storageState: 'auth/user-state.json',
         contextOptions: {
           javaScriptEnabled: true,
         },
