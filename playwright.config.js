@@ -27,9 +27,8 @@ module.exports = defineConfig({
     : [['list'], ['html', { open: 'never' }]],
 
   /* Shared settings for all the projects below. */
-  use: {
-    /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: 'https://praznicna-nerra.vercel.app',
+use: {
+    baseURL: 'https://practicesoftwaretesting.com',
 
     /* Increased timeouts for CI environments (GitHub Actions is often slower) */
     actionTimeout: 15000,
