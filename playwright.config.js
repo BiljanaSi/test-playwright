@@ -1,5 +1,7 @@
 // @ts-check
 import { defineConfig, devices } from '@playwright/test';
+import fs from 'fs';
+import path from 'path';
 
 /**
  * Read environment variables from file.
@@ -8,7 +10,8 @@ import { defineConfig, devices } from '@playwright/test';
 // import dotenv from 'dotenv';
 // import path from 'path';
 // dotenv.config({ path: path.resolve(__dirname, '.env') });
-
+const authFile = path.join(process.cwd(), 'auth/user-state.json');
+const storageState = fs.existsSync(authFile) ? authFile : undefined;
 /**
  * @see https://playwright.dev/docs/test-configuration
  */
@@ -36,7 +39,8 @@ export default defineConfig({
   use: {
   actionTimeout: 10000,
   navigationTimeout: 15000,
-  storageState: 'auth/user-state.json',
+  storageState: storageState,
+  //storageState: 'auth/user-state.json',
   screenshot: 'only-on-failure', // screenshot samo za failed testove
   video: 'retain-on-failure',    // video samo za failed testove
   trace: 'on-first-retry',       // trace za debug prilikom retry-a
