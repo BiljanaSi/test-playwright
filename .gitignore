@@ -139,3 +139,4 @@ test-results/
 blob-report/
 playwright/.cache/
 reports
+auth/user.json
