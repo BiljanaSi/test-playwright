@@ -18,8 +18,13 @@ module.exports = defineConfig({
   /* Use 1 worker on CI to maintain a single IP footprint and avoid CAPTCHAs/Blocks */
   workers: process.env.CI ? 1 : undefined,
 
-  /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+  /* Smart reporter configuration:
+     - On CI (GitHub): Uses 'github' for annotations and 'list' for clear step-by-step logs.
+     - Locally: Uses 'list' for clean terminal output and 'html' for a detailed report.
+  */
+  reporter: process.env.CI 
+    ? [['github'], ['list']] 
+    : [['list'], ['html', { open: 'never' }]],
 
   /* Shared settings for all the projects below. */
   use: {
