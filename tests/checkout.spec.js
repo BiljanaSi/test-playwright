@@ -10,7 +10,7 @@ test.describe('Shopping Cart & Checkout Flow', () => {
   let loginPage;
   let checkoutPage;
 
-test.use({ storageState: 'auth/user-state.json' });
+//test.use({ storageState: 'auth/user-state.json' });
 
 test.beforeEach(async ({ page }) => {
 
@@ -19,6 +19,8 @@ test.beforeEach(async ({ page }) => {
      checkoutPage = new  CheckOut(page);
 
     await loginPage.goto();
+
+    await page.waitForLoadState('networkidle');
 
     await expect(page).toHaveURL('https://practicesoftwaretesting.com/');
 
