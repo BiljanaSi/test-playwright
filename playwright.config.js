@@ -37,6 +37,11 @@ export default defineConfig({
   ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
+  userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+  
+    launchOptions: {
+      args: ['--disable-blink-features=AutomationControlled']
+    },
   actionTimeout: 10000,
   navigationTimeout: 15000,
   storageState: storageState,
