@@ -141,3 +141,4 @@ playwright/.cache/
 reports
 auth/user.json
 auth/user-state.json
+/auth
