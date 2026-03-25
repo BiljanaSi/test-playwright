@@ -18,10 +18,7 @@ class LogIn {
     }
     
     async clickOnsignLink(){
-
-        await this.page.waitForLoadState('networkidle');
-
-        await this.singin.click({ force: true, timeout: 10000 });
+        await this.singin.click();
     }
     
 
@@ -35,7 +32,6 @@ class LogIn {
     }
 
     async clickOnLogin(){
-        await this.singin.waitFor({ state: 'visible', timeout: 10000 });
         await this.login.click();
       
     }

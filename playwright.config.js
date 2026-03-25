@@ -1,91 +1,90 @@
-const { defineConfig, devices } = require('@playwright/test');
+// @ts-check
+import { defineConfig, devices } from '@playwright/test';
+
+/**
+ * Read environment variables from file.
+ * https://github.com/motdotla/dotenv
+ */
+// import dotenv from 'dotenv';
+// import path from 'path';
+// dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 /**
  * @see https://playwright.dev/docs/test-configuration
  */
-module.exports = defineConfig({
+export default defineConfig({
   testDir: './tests',
-
-  /* Run tests in files in sequence on CI to avoid triggering anti-bot protections */
-  fullyParallel: false,
-
-  /* Fail the build on CI if you accidentally left test.only in the source code */
-  forbidOnly: !!process.env.CI,
-
-  /* Retry on CI to handle flaky network or slow page loads */
-  retries: process.env.CI ? 2 : 0,
-
-  /* Use 1 worker on CI to maintain a single IP footprint and avoid CAPTCHAs/Blocks */
-  workers: process.env.CI ? 1 : undefined,
-
-  /* Smart reporter configuration:
-     - On CI (GitHub): Uses 'github' for annotations and 'list' for clear step-by-step logs.
-     - Locally: Uses 'list' for clean terminal output and 'html' for a detailed report.
-  */
-reporter: process.env.CI 
-    ? [['github'], ['list'], ['html', { open: 'never' }]] 
-    : [['list'], ['html', { open: 'never' }]],
-
-  /* Shared settings for all the projects below. */
-use: {
-    baseURL: 'https://practicesoftwaretesting.com',
-    headless: true,
-
-    /* Increased timeouts for CI environments (GitHub Actions is often slower) */
-    actionTimeout: 15000,
-    navigationTimeout: 20000,
-
-    /* Collect trace and video only on failure for easier debugging */
-    trace: 'on-first-retry',
-    video: 'retain-on-failure',
-    screenshot: 'only-on-failure',
-
-    /* Fixed viewport to prevent elements from hiding in mobile/hamburger menus */
-    viewport: { width: 1920, height: 1080 },
-
-    /* Masking the browser as a real user to bypass basic bot detection */
-    userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
-
-    launchOptions: {
-      /* Add a small delay between actions to simulate human-like interaction */
-      slowMo: 150,
-      args: [
-        '--headless=new',
-        '--disable-blink-features=AutomationControlled',
-        '--no-sandbox',
-        '--disable-setuid-sandbox',
-        '--disable-infobars',
-        '--disable-dev-shm-usage',
-      ],
-    },
+  timeout: 60000,
+  expect: {
+    timeout: 10000,
   },
+  /* Run tests in files in parallel */
+  fullyParallel: true,
+  /* Fail the build on CI if you accidentally left test.only in the source code. */
+  forbidOnly: !!process.env.CI,
+  /* Retry on CI only */
+  retries: process.env.CI ? 2 : 0,
+  /* Opt out of parallel tests on CI. */
+  workers: process.env.CI ? 1 : 2,
+  /* Reporter to use. See https://playwright.dev/docs/test-reporters */
+  reporter: [
+  ['list'], 
+  ['html', { outputFolder: 'reports/html', open: 'never' }],
+  ['json', { outputFile: 'reports/results.json' }] 
+  ],
+  /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
+  use: {
+  actionTimeout: 10000,
+  navigationTimeout: 15000,
+  storageState: 'auth/user-state.json',
+  screenshot: 'only-on-failure', // screenshot samo za failed testove
+  video: 'retain-on-failure',    // video samo za failed testove
+  trace: 'on-first-retry',       // trace za debug prilikom retry-a
+},
 
   /* Configure projects for major browsers */
   projects: [
-    /* 1. Chromium project - Always active (Local & CI) */
+   {
+    name: 'chromium',
+     use: { ...devices['Desktop Chrome'] },
+   },
+
     {
-      name: 'chromium',
-      use: { 
-        ...devices['Desktop Chrome'],
-        storageState: 'auth/user-state.json',
-        contextOptions: {
-          javaScriptEnabled: true,
-          trace: 'on', 
-          video: 'on',
-        },
-      },
+       name: 'firefox',
+       use: { ...devices['Desktop Firefox'] },
     },
 
-    /* 2. Add Firefox and Webkit ONLY if we are NOT on GitHub Actions (CI) */
-    ...(!process.env.CI ? [
-      {
-        name: 'firefox',
-        use: { ...devices['Desktop Firefox'] },
-      },
-      {
-        name: 'webkit',
-        use: { ...devices['Desktop Safari'] },
-      },
-    ] : []),
+    {
+          name: 'webkit',
+          use: { ...devices['Desktop Safari'] },
+    },
+
+    /* Test against mobile viewports. */
+    // {
+    //   name: 'Mobile Chrome',
+    //   use: { ...devices['Pixel 5'] },
+    // },
+    // {
+    //   name: 'Mobile Safari',
+    //   use: { ...devices['iPhone 12'] },
+    // },
+
+    /* Test against branded browsers. */
+    // {
+    //   name: 'Microsoft Edge',
+    //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
+    // },
+    // {
+    //   name: 'Google Chrome',
+    //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
+    // },
   ],
+
+  /* Run your local dev server before starting the tests */
+  // webServer: {
+  //   command: 'npm run start',
+  //   url: 'http://localhost:3000',
+  //   reuseExistingServer: !process.env.CI,
+  // },
 });
+
