@@ -20,9 +20,7 @@ test.beforeEach(async ({ page }) => {
 
     await loginPage.goto();
 
-    if (await checkoutPage.logeduser.isVisible()) {
-        return; 
-    }
+    await page.waitForLoadState('domcontentloaded');
 
     await expect(page).toHaveURL('https://practicesoftwaretesting.com/');
 
