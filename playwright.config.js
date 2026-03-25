@@ -68,6 +68,8 @@ use: {
         storageState: 'auth/user-state.json',
         contextOptions: {
           javaScriptEnabled: true,
+          trace: 'on', 
+          video: 'on',
         },
       },
     },
