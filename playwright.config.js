@@ -40,7 +40,10 @@ use: {
     screenshot: 'only-on-failure',
 
     /* Fixed viewport to prevent elements from hiding in mobile/hamburger menus */
-    viewport: { width: 1280, height: 720 },
+    viewport: { width: 1920, height: 1080 },
+    launchOptions: {
+    args: ['--window-size=1920,1080'],
+  },
 
     /* Masking the browser as a real user to bypass basic bot detection */
     userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
