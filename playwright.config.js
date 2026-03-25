@@ -22,8 +22,8 @@ module.exports = defineConfig({
      - On CI (GitHub): Uses 'github' for annotations and 'list' for clear step-by-step logs.
      - Locally: Uses 'list' for clean terminal output and 'html' for a detailed report.
   */
-  reporter: process.env.CI 
-    ? [['github'], ['list']] 
+reporter: process.env.CI 
+    ? [['github'], ['list'], ['html', { open: 'never' }]] 
     : [['list'], ['html', { open: 'never' }]],
 
   /* Shared settings for all the projects below. */
@@ -41,9 +41,6 @@ use: {
 
     /* Fixed viewport to prevent elements from hiding in mobile/hamburger menus */
     viewport: { width: 1920, height: 1080 },
-    launchOptions: {
-    args: ['--window-size=1920,1080'],
-  },
 
     /* Masking the browser as a real user to bypass basic bot detection */
     userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
@@ -52,7 +49,7 @@ use: {
       /* Add a small delay between actions to simulate human-like interaction */
       slowMo: 150,
       args: [
-        /* IMPORTANT: Disables the flag that identifies the browser as automated */
+        '--window-size=1920,1080', 
         '--disable-blink-features=AutomationControlled',
         '--no-sandbox',
         '--disable-setuid-sandbox',
