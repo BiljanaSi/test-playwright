@@ -50,7 +50,7 @@ use: {
       /* Add a small delay between actions to simulate human-like interaction */
       slowMo: 150,
       args: [
-       '--window-size=1920,1080', 
+        '--headless=new',
         '--disable-blink-features=AutomationControlled',
         '--no-sandbox',
         '--disable-setuid-sandbox',
