@@ -29,6 +29,7 @@ reporter: process.env.CI
   /* Shared settings for all the projects below. */
 use: {
     baseURL: 'https://practicesoftwaretesting.com',
+    headless: true,
 
     /* Increased timeouts for CI environments (GitHub Actions is often slower) */
     actionTimeout: 15000,
@@ -49,11 +50,12 @@ use: {
       /* Add a small delay between actions to simulate human-like interaction */
       slowMo: 150,
       args: [
-        '--window-size=1920,1080', 
+       '--window-size=1920,1080', 
         '--disable-blink-features=AutomationControlled',
         '--no-sandbox',
         '--disable-setuid-sandbox',
         '--disable-infobars',
+        '--disable-dev-shm-usage',
       ],
     },
   },
